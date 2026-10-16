@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 25.8, "left": -93.2, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -109.2,
+      "left": 339.8,
+      "attrs": { "color": "limegreen" }
+    },
+    { "type": "wokwi-microsd-card", "id": "sd1", "top": -105.37, "left": 230.47, "attrs": {} },
+    { "type": "wokwi-ds1307", "id": "rtc1", "top": -120.6, "left": 96.1, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -38.1, "left": -168.6, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 139.2,
+      "left": -154.15,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -43.2,
+      "left": 335.45,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:NC", "r1:2", "green", [ "v0" ] ],
+    [ "dht1:VCC", "esp:5V", "red", [ "v0" ] ],
+    [ "dht1:SDA", "esp:5V", "green", [ "v0" ] ],
+    [ "r1:1", "esp:CMD", "green", [ "h19.2", "v67.2" ] ],
+    [ "r2:2", "esp:0", "green", [ "h0", "v171.6" ] ],
+    [ "led1:C", "bb1:30b.f", "green", [ "v0" ] ],
+    [ "sd1:GND", "bb1:30b.j", "black", [ "h38.4", "v259.31" ] ],
+    [ "sd1:VCC", "esp:D0", "red", [ "h28.8", "v9.74" ] ],
+    [ "sd1:CS", "esp:D0", "green", [ "h0", "v230.46" ] ],
+    [ "sd1:DO", "esp:18", "green", [ "h19.2", "v172.91" ] ],
+    [ "sd1:CD", "esp:5", "green", [ "h9.6", "v211.2" ] ],
+    [ "rtc1:GND", "bb1:29b.g", "black", [ "h-57.6", "v-19.2", "h172.8" ] ],
+    [ "rtc1:5V", "esp:D0", "red", [ "h-96", "v-29.2", "h211.2", "v316.8" ] ],
+    [
+      "rtc1:SDA",
+      "esp:CLK",
+      "green",
+      [ "h-96", "v66.9", "h134.4", "v297.6", "h-57.6", "v-76.8", "h0", "v0", "h9.6" ]
+    ],
+    [ "rtc1:SCL", "esp:D0", "green", [ "h-19.2", "v47.8", "h105.6", "v220.8" ] ]
+  ],
+  "dependencies": {}
+}
